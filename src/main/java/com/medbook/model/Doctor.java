@@ -1,6 +1,10 @@
 package com.medbook.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 name = "doctors"
@@ -11,7 +15,6 @@ public class Doctor {
     private Long id;
 
     private String name;
-
     private String specialty;
 
     public Doctor() {
