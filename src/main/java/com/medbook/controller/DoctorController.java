@@ -1,39 +1,28 @@
 package com.medbook.controller;
 
+import com.medbook.model.Doctor;
+import com.medbook.repository.DoctorRepository;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+import java.util.List;
 
 @RestController
 "/api/doctors"
 @CrossOrigin
 public class DoctorController {
 
-    private final List<Map<String, String>> doctors = new ArrayList<>();
+    private final DoctorRepository doctorRepository;
 
-    public DoctorController() {
-        doctors.add(Map.of(
-            "id", "1",
-            "name", "Анна Иванова",
-            "specialty", "Терапевт"
-        ));
-
-        doctors.add(Map.of(
-            "id", "2",
-            "name", "Иван Петров",
-            "specialty", "Кардиолог"
-        ));
-
-        doctors.add(Map.of(
-            "id", "3",
-            "name", "Мария Смирнова",
-            "specialty", "Невролог"
-        ));
+    public DoctorController(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
     }
 
     @GetMapping
-    public List<Map<String, String>> getDoctors() {
-        return doctors;
+    public List<Doctor> getDoctors() {
+        return doctorRepository.findAll();
+    }
+
+    @PostMapping
+    public Doctor createDoctor(@RequestBody Doctor doctor) {
+        return doctorRepository.save(doctor);
     }
 }
-
-
