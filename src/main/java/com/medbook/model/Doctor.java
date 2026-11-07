@@ -7,11 +7,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-name = "doctors"
+@Table(name = "doctors")
 public class Doctor {
 
     @Id
-    strategy = GenerationType.IDENTITY
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
