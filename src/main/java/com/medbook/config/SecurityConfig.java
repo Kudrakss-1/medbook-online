@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
 @id117141452 (@Configuration)
 public class SecurityConfig {
@@ -45,8 +46,24 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
+            .securityContext(context -> context
+                .securityContextRepository(
+                    new HttpSessionSecurityContextRepository()
+                )
+            )
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/api/auth/logout")
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(200);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(
+                        "{\"message\":\"Выход выполнен успешно\"}"
+                    );
+                })
             );
 
         return http.build();
