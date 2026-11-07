@@ -1,6 +1,10 @@
 package com.medbook.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,11 +16,8 @@ public class Appointment {
     private Long id;
 
     private String patientName;
-
     private Long doctorId;
-
     private LocalDateTime appointmentDateTime;
-
     private String status = "BOOKED";
 
     public Appointment() {
@@ -46,7 +47,8 @@ public class Appointment {
         return appointmentDateTime;
     }
 
-    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
+    public void setAppointmentDateTime(
+            LocalDateTime appointmentDateTime) {
         this.appointmentDateTime = appointmentDateTime;
     }
 
@@ -58,3 +60,5 @@ public class Appointment {
         this.status = status;
     }
 }
+
+
