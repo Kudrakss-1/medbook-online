@@ -26,3 +26,5 @@ public class DoctorController {
         return doctorRepository.save(doctor);
     }
 }
+
+
